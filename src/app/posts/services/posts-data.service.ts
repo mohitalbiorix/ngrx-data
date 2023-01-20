@@ -4,6 +4,7 @@ import { DefaultDataService, HttpUrlGenerator } from '@ngrx/data';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Update } from '@ngrx/entity';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class PostsDataService extends DefaultDataService<Post> {
   }
 
   // for get all post data
-  // getAll() => dataService methods
+  // getAll(), add(), update(), delete() => dataService methods bydefault
   override getAll(): Observable<Post[]> {
     return this.http
       .get(`https://vue-completecourse.firebaseio.com/posts.json`)
@@ -30,4 +31,36 @@ export class PostsDataService extends DefaultDataService<Post> {
       );
   }
 
+   // add post action
+  override add(post: Post): Observable<Post> {
+    return this.http
+      .post<{ name: string }>(
+        `https://vue-completecourse.firebaseio.com/posts.json`,
+        post
+      )
+      .pipe(
+        map((data) => {
+          return { ...post, id: data.name };
+        })
+      );
+  }
+
+  // update post action
+  override update(post: Update<Post>): Observable<Post> {
+    return this.http.put<Post>(
+      `https://vue-completecourse.firebaseio.com/posts/${post.id}.json`,
+      { ...post.changes }
+    );
+  }
+
+  // delete post action
+  override delete(id: string): Observable<string> {
+    return this.http
+      .delete(`https://vue-completecourse.firebaseio.com/posts/${id}.json`)
+      .pipe(
+        map((data) => {
+          return id;
+        })
+      );
+  }
 }

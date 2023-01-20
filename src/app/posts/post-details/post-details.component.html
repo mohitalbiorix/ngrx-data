@@ -1,1 +1,15 @@
-<p>post-details works!</p>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title text-center">Post Details</h3>
+            <div *ngIf="post as postData">
+                <p><span class="f-500">Id:</span> {{ postData.id }}</p>
+                <p><span class="f-500">Title:</span> {{ postData.title }}</p>
+                <p><span class="f-500">Description:</span> {{ postData.description }}</p>
+            </div>
+            <a class="btn btn-outline-dark" [routerLink]="['/posts']">
+                <i class="fa fa-angle-double-left" aria-hidden="true"></i> Back to posts
+            </a>
+        </div>
+    </div>
+</div>

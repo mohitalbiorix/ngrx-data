@@ -1,19 +1,31 @@
 <div class="card">
   <div class="card-body">
-    <h2 class="card-title text-center">Posts List</h2>
-    <table class="table table-striped">
+    <h3 class="mt-10 text-center">Posts List</h3>
+    <a class="btn btn-outline-dark" (click)="onAddPost()"><i class="fa fa-plus" aria-hidden="true"></i></a>
+    <table class="table">
       <thead>
         <tr>
-          <th>Id</th>
-          <th>Title</th>
-          <th>Description</th>
+          <th scope="col">Id</th>
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+          <th scope="col" colspan="2">Actions</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let post of posts$ | async">
-          <td>{{ post.id }}</td>
-          <td>{{ post.title }}</td>
-          <td>{{ post.description }}</td>
+          <th scope="row">{{post.id}}</th>
+          <td>{{post.title}}</td>
+          <td>{{post.description}}</td>
+          <td>
+            <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="onUpdatePost(post.id)"></i>
+          </td>
+          <td>
+            <i class="fa fa-trash-o text-danger" aria-hidden="true" (click)="onDeletePost($event, post.id)"></i>
+          </td>
+          <td>
+            <i class="fa fa-info-circle" aria-hidden="true" (click)="onPostDetals(post.id)"></i>
+          </td>
         </tr>
       </tbody>
     </table>

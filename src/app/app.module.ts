@@ -15,6 +15,7 @@ import { StoreModule } from '@ngrx/store';
 import { HttpClientModule } from '@angular/common/http';
 import { PostsDataService } from './posts/services/posts-data.service';
 import { EntityDataService } from '@ngrx/data';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { EntityDataService } from '@ngrx/data';
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot(entityConfig),
     HttpClientModule,
+    ReactiveFormsModule
 
   ],
   providers: [PostsDataService],

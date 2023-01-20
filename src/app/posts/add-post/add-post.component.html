@@ -1,1 +1,18 @@
-<p>add-post works!</p>
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title text-center">{{action === 'ADD' ? 'Add' : 'Edit'}} Post</h3>
+    <form [formGroup]="postForm">
+      <div class="mb-3">
+        <label>Title</label>
+        <input type="text" class="form-control" formControlName="title" />
+      </div>
+      <div class="mb-3">
+        <label>Description</label>
+        <textarea class="form-control" formControlName="description"></textarea>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-success" (click)="onAddPost()">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
